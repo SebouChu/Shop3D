@@ -4,5 +4,5 @@ class Shoe < ApplicationRecord
     validates :name, :description, :price, presence:true
     validates :name, :price, uniqueness:true
 
-    has_one_attached :picture_3D
+    has_attached_file :picture_3D, :cloudinary_resource_type => :raw
 end
