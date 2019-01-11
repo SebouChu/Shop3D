@@ -1,5 +1,6 @@
 class Admin::ShoesController < ApplicationController
   before_action :set_shoe, only: [:show, :edit, :update, :destroy]
+  # before_action :authenticate_user!
   before_action :require_admin
 
   # GET /shoes
@@ -77,7 +78,7 @@ class Admin::ShoesController < ApplicationController
 
     def require_admin
       unless current_user.admin?
-      redirect_to meets_path
+      redirect_to shoes_path
       end
     end
 end

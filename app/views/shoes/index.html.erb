@@ -8,7 +8,11 @@
     <%# <div class="btn-close"></div> %>
      <!-- Login link (when logged out) -->
     <% if current_user && current_user.admin? %>
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        <% if user_signed_in? %>
+        <%= link_to t(".sign_out", default: "Déconnecter"), destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to t(".sign_in", default: "Se Connecter"), new_user_session_path,class: "navbar-wagon-item navbar-wagon-link" %>
+      <% end %>
     <%end%>
   </header>
 
