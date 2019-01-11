@@ -7,9 +7,9 @@
     <% end %>
     <%# <div class="btn-close"></div> %>
      <!-- Login link (when logged out) -->
-    <%# <% if current_user && current_user.admin?%>
+    <% if current_user && current_user.admin? %>
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-    <%# <%end%>
+    <%end%>
   </header>
 
   <div class="container-content container-fluid">
@@ -48,4 +48,3 @@
 
   </div>
 
-<%= link_to 'New Shoe', new_shoe_path %>

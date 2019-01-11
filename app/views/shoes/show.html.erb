@@ -7,9 +7,9 @@
     <% end %>
     <%# <div class="btn-close"></div> %>
      <!-- Login link (when logged out) -->
-    <%# <% if current_user && current_user.admin?%>
+    <% if current_user && current_user.admin? %>
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-    <%# <%end%>
+    <% end %>
   </header>
 
   <div class="container-content container-fluid">
@@ -33,8 +33,7 @@
             <input class="size available" type="nomber" id="size" value="46">
             <input class="size available" type="nomber" id="size" value="47">
           </div>
-          <%= link_to 'Destroy', @shoe, method: :delete, class: "submit", data: { confirm: 'Are you sure?' }  %>
-          <%= link_to 'Commander', @shoe, class:"submit" %>
+          <%= link_to 'Commander', @shoe, id:"submit" %>
           <%# <input type="text" id="submit" value="Commander"> %>
 
         </div>
