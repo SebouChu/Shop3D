@@ -1,4 +1,3 @@
-console.log("test1")
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
