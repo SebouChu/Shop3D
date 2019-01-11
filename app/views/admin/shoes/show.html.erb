@@ -32,8 +32,8 @@
             <input class="size available" type="nomber" id="size" value="46">
             <input class="size available" type="nomber" id="size" value="47">
           </div>
-          <%= link_to 'Edit', edit_shoe_path(@shoe) %>
-          <%= link_to 'New Shoe', new_shoe_path %>
+          <%= link_to 'Edit', edit_admin_shoe_path(@shoe) %>
+          <%= link_to 'New Shoe', new_admin_shoe_path %>
           <%= link_to 'Destroy', @shoe, method: :delete, class: "submit", data: { confirm: 'Are you sure?' }  %>
           <%= link_to 'Commander', @shoe, id:"submit" %>
           <%# <input type="text" id="submit" value="Commander"> %>
@@ -51,4 +51,4 @@
 
 
 
-<%= link_to 'Back', shoes_path %>
+<%= link_to 'Back', admin_shoes_path %>

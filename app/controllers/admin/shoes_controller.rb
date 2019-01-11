@@ -1,5 +1,6 @@
 class Admin::ShoesController < ApplicationController
   before_action :set_shoe, only: [:show, :edit, :update, :destroy]
+  # before_action :authenticate_user!
   before_action :require_admin
 
   # GET /shoes
