@@ -77,7 +77,7 @@ class Admin::ShoesController < ApplicationController
 
     def require_admin
       unless current_user.admin?
-      redirect_to meets_path
+        redirect_to shoes_path
       end
     end
 end
