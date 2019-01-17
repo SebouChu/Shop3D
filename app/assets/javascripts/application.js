@@ -26,8 +26,12 @@ include('javascript/three/AnimationMixer.js');
 include('javascript/three/Clock.js');
 // include('javascript/pages/shop-three.js');
 include('javascript/pages/shop.js');
+include('javascript/pages/click-hold-three.js');
+include('javascript/pages/home-three.js');
+include('javascript/main.js');
+include('javascript/pages/home.js');
 
 
 
 
-console.log("test2")
+

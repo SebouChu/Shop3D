@@ -1,6 +1,10 @@
 class ShoesController < ApplicationController
   before_action :set_shoe, only: [:show, :edit, :update, :destroy]
 
+  def home
+    @shoes = Shoe.all
+  end
+
   # GET /shoes
   # GET /shoes.json
   def index

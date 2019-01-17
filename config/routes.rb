@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :shoes
   end
-  root to: 'shoes#index'
+  root to: 'shoes#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
