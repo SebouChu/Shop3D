@@ -1,7 +1,7 @@
 <section id="shop">
 
 <header class="container-fluid">
-    
+
     <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "nike-logo.png", height: 50 %>
     <% end %>
@@ -39,12 +39,12 @@
             <input class="size available" type="button" id="size" value="45">
             <input class="size available" type="button" id="size" value="46">
           </div>
-          
+
           <div class="container-submit">
             <input type="button" id="submit" value="Commander">
           </div>
 
-          
+
           <% end %>
 
         </div>
@@ -180,8 +180,10 @@
       controls.update();
     };
 
-    init();
-    animate();
+    window.addEventListener('DOMContentLoaded', function () {
+        init();
+        animate();
+    });
 
 
 
