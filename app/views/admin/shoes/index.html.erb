@@ -1,15 +1,21 @@
-
+<section id="shop">
 
 <header class="container-fluid">
+    
     <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "nike-logo.png", height: 50 %>
     <% end %>
-    <%# <div class="btn-close"></div> %>
      <!-- Login link (when logged out) -->
-    <% if current_user && current_user.admin? %>
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-    <%end%>
-</header>
+    <div class="connexion-container">
+      <% if current_user && current_user.admin? %>
+          <% if user_signed_in? %>
+          <%= link_to t(".sign_out", default: "Déconnecter"), destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to t(".sign_in", default: "Se Connecter"), new_user_session_path,class: "navbar-wagon-item navbar-wagon-link" %>
+        <% end %>
+      <%end%>
+    </div>
+  </header>
 
   <div class="container-content container-fluid">
     <div class="row">
@@ -17,34 +23,175 @@
       <div class="col-5">
         <div class="container-description">
           <h1 class="name-product"><%= shoe.name %></h1>
-          <%# <h2 class="color-product"><%= shoe.color %><%#</h2> %>
-          <h3 class="price-product"><%= shoe.price %></h3>
+          <h2 class="color-product"><%= shoe.color %></h2>
+          <h3 class="price-product"><%= shoe.price %> $</h3>
           <p class="desc-product">
             <%= shoe.description %>
           </p>
           <div class="size-product">
-            <input class="size available" type="nomber" id="size" value="38">
-            <input class="size available" type="nomber" id="size" value="39">
-            <input class="size available" type="nomber" id="size" value="40">
-            <input class="size not-available" type="nomber" id="size" value="41">
-            <input class="size not-available" type="nomber" id="size" value="42">
-            <input class="size available" type="nomber" id="size" value="44">
-            <input class="size available" type="nomber" id="size" value="45">
-            <input class="size available" type="nomber" id="size" value="46">
-            <input class="size available" type="nomber" id="size" value="47">
+            <input class="size available" type="button" id="size" value="38">
+            <input class="size available" type="button" id="size" value="39">
+            <input class="size available" type="button" id="size" value="40">
+            <input class="size not-available" type="button" id="size" value="41">
+            <input class="size not-available" type="button" id="size" value="42">
+            <input class="size available" type="button" id="size" value="44">
+            <input class="size available" type="button" id="size" value="45">
+            <input class="size available" type="button" id="size" value="46">
           </div>
-          <%= link_to 'Commander', shoe, id:"submit" %>
-          <%# <input type="text" id="submit" value="Commander"> %>
+          
+          <div class="container-submit">
+            <input type="button" id="submit" value="Commander">
+          </div>
+          <div class="container-submit">
+            <%= link_to 'New Shoe', new_admin_shoe_path, id="new_shoes" %>
+          </div>
+
+          
           <% end %>
 
         </div>
       </div>
 
       <div id="canvas-scene" class="col-7">
-
         <!-- THREE JS SCENE HERE -->
       </div>
-
+      <%# <%= link_to 'Edit', edit_admin_shoe_path(@shoe) %>
+ 
+<%# <%= link_to 'Destroy', @shoe, method: :delete, class: "submit", data: { confirm: 'Are you sure?' }  %>
   </div>
 
-<%= link_to 'New Shoe', new_admin_shoe_path %>
+</section>
+
+<script>
+    var scene;
+    var camera;
+    var renderer;
+    var width;
+    var height;
+    var canvas = document.getElementById("canvas-scene");
+
+    function init() {
+
+      width = $("#canvas-scene").width();
+      height = $("#canvas-scene").height();
+
+      scene = new THREE.Scene();
+
+      renderer = new THREE.WebGLRenderer();
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      canvas.appendChild(renderer.domElement);
+
+      camera = new THREE.PerspectiveCamera(50, width/height, 0.1, 1000);
+      camera.position.set(0,-.5,27.5);
+      camera.lookAt(0,0,0);
+
+      scene.add(camera);
+
+      // renderer.setClearColor(0x333F47);
+
+      var light1 = new THREE.PointLight(0xffffff, 1);
+      light1.position.set(-100, -250, 100);
+      scene.add(light1);
+
+      var keyLight = new THREE.DirectionalLight(new THREE.Color(0xffffff), 0.5);
+      keyLight.position.set(-100, 0, 100);
+      var fillLight = new THREE.DirectionalLight(new THREE.Color(0xffffff), 0.75);
+      fillLight.position.set(100, 0, 100);
+      var backLight = new THREE.DirectionalLight(0xffffff, 1);
+      backLight.position.set(100, 0, -100).normalize();
+
+      scene.add(keyLight);
+      scene.add(fillLight);
+      scene.add(backLight);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+      myLoader();
+
+      window.addEventListener('resize', function() {
+        width = $("#canvas-scene").width();
+        height = $("#canvas-scene").height();
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      });
+
+    }
+
+    function myLoader() {
+
+      var rotationSpeed;
+      var loader = new THREE.GLTFLoader()
+      var path = '<%= Shoe.all.count > 0 ? url_for(Shoe.last.picture_3D) : "" %>'
+
+      loader.load(path, function(gltf) {
+        var mesh = gltf.scene;
+
+        mesh.rotation.y = -3.2;
+
+        rotationSpeed = .02;
+        rotation();
+        function rotation() {
+          mesh.rotation.y -= rotationSpeed;
+          renderer.render(scene, camera);
+          controls.update();
+          requestAnimationFrame(rotation);
+        };
+
+        mesh.traverse(function(node){
+          if (node.isMesh) {
+            node.material.color = new THREE.Color(0xffffff);
+          }
+        });
+
+        var Handler = function() {
+          this.clickHandler = function() {
+              var self = this;
+              this.timerId = setTimeout(function() {
+                  // ACCELERATION
+                  rotationSpeed = 0;
+              },1);
+
+              this.timerId = setTimeout(function() {
+                  rotationSpeed = 0;
+              },1000);
+          };
+
+          this.cancelHandler = function() {
+              if (this.timerId) {
+                  clearTimeout(this.timerId);
+                  rotationSpeed = 0;
+                  mesh.rotation.x = 0;
+                  mesh.rotation.z = 0;
+              }
+          }
+        }
+        var h = new Handler();
+        addEventListener('mousedown', h.clickHandler.bind(h));
+        addEventListener('mouseup', h.cancelHandler.bind(h));
+
+        scene.add(mesh);
+      });
+
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+      controls.update();
+    };
+
+    init();
+    animate();
+
+
+
+
+
+
+
+
+    //
+</script>
+

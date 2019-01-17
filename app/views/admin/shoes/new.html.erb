@@ -1,8 +1,9 @@
-<div class="container-content container-fluid">
+<div class="container container-form">
      <h1>New Shoe</h1>
 
-    <%= render 'form', shoe: @shoe %>
+    <div class="form-new">
+        <%= render 'form', shoe: @shoe %>
+    </div>
 
     <%= link_to 'Back', admin_shoes_path %>
-
 </div>

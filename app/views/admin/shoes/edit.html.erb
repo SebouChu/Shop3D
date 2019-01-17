@@ -1,6 +1,10 @@
-<h1>Editing Shoe</h1>
 
-<%= render 'form', shoe: @shoe %>
+<div class="container container-form">
+     <h1>Editing Shoe</h1>
 
-<%= link_to 'Show', @shoe %> |
-<%= link_to 'Back', shoes_path %>
+    <div class="form-new">
+        <%= render 'form', shoe: @shoe %>
+    </div>
+    <%= link_to 'Show', @shoe %> |
+    <%= link_to 'Back', admin_shoes_path %>
+</div>

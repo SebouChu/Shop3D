@@ -24,7 +24,7 @@
       <div class="col-5">
         <div class="container-description">
           <h1 class="name-product"><%= shoe.name %></h1>
-          <%# <h2 class="color-product"><%= shoe.color %><%#</h2> %>
+          <h2 class="color-product"><%= shoe.color %></h2>
           <h3 class="price-product"><%= shoe.price %> $</h3>
           <p class="desc-product">
             <%= shoe.description %>
@@ -41,7 +41,7 @@
           </div>
           
           <div class="container-submit">
-            <input type="text" id="submit" value="Commander">
+            <input type="button" id="submit" value="Commander">
           </div>
 
           
@@ -55,6 +55,9 @@
       </div>
 
   </div>
+  <%= link_to 'Edit', edit_admin_shoe_path(@shoes) %>
+ <%= link_to 'New Shoe', new_admin_shoe_path %>
+<%= link_to 'Destroy', @shoe, method: :delete, class: "submit", data: { confirm: 'Are you sure?' }  %>
 </section>
 
 <script>

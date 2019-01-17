@@ -1,0 +1,32 @@
+.container-form {
+
+    min-height: 100vh;
+
+    .form-new {
+        margin-top: 100px;
+    }
+
+    .field {
+        margin: 20px 0;
+        display: flex;
+
+        label {
+            min-width: 20%;
+        }
+        input, textarea {
+            background-color: transparent;
+            color: white;
+            min-width: 20%;
+        }
+    }
+
+    textarea {
+        background-color: transparent;
+    }
+
+    #shoe_picture_3D {
+        border: none;
+    }
+    
+
+}

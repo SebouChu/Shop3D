@@ -1,7 +1,11 @@
 class Admin::ShoesController < ApplicationController
-  before_action :set_shoe, only: [:show, :edit, :update, :destroy]
-  # before_action :authenticate_user!
+  before_action :set_shoe, only: [:show, :edit, :update, :destroy,]
+  before_action :authenticate_user!
   before_action :require_admin
+
+  def home
+    @shoes = Shoe.all
+  end
 
   # GET /shoes
   # GET /shoes.json
@@ -73,12 +77,12 @@ class Admin::ShoesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shoe_params
-      params.require(:shoe).permit(:name, :price, :description, :picture_3D)
+      params.require(:shoe).permit(:name, :price, :description, :picture_3D, :color)
     end
 
     def require_admin
       unless current_user.admin?
-        redirect_to shoes_path
+        redirect_to admin_shoes_path
       end
     end
 end
