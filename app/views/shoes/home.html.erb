@@ -5,7 +5,7 @@
     <%= image_tag "nike-logo.png", height: 50 %>
     <% end %>
     <!-- <div class="btn-close"></div> -->
-    
+
   </header>
 
   <div class="container-content">
@@ -225,17 +225,10 @@ function animate() {
   controls.update();
 };
 
-init();
-animate();
-
-
-
-
-
-
-
-
-//
+window.addEventListener('DOMContentLoaded', function () {
+    init();
+    animate();
+});
 
   </script>
   <script>$(".cross-btn, .colors-btn").mouseover(function() { console.log("Hello");

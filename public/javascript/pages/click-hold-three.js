@@ -143,8 +143,10 @@ function animate() {
   controls.update();
 };
 
-init();
-animate();
+window.addEventListener('DOMContentLoaded', function () {
+    init();
+    animate();
+});
 
 
 
